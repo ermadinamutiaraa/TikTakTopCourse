@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Tik Tak Top Course Script Loaded');
     
     // ==================== GOOGLE SHEETS CONFIG ====================
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzTYBxuitghaY503DMDDJp01kGz2ABDjcERP6gIAJl4o74oE59v8t5yX0V8bzV8ZZ8nYg/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwhclmCPbYCLymUVwJT-ag4kKb6tEO-Aqr2IxNUKEwo6T8nxuqBOzSdhit7qNX0P3zsjQ/exec";
     
     // ==================== MOBILE MENU TOGGLE ====================
     const hamburger = document.getElementById('hamburger');
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('📤 Sending to Google Sheets:', submissionData);
                 
                 try {
-                   fetch("https://script.google.com/macros/s/AKfycbzTYBxuitghaY503DMDDJp01kGz2ABDjcERP6gIAJl4o74oE59v8t5yX0V8bzV8ZZ8nYg/exec", {
+                   fetch("https://script.google.com/macros/s/AKfycbwhclmCPbYCLymUVwJT-ag4kKb6tEO-Aqr2IxNUKEwo6T8nxuqBOzSdhit7qNX0P3zsjQ/exec" {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(submissionData)
