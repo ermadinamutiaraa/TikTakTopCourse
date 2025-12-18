@@ -256,13 +256,24 @@ body {
 
 /* Jumbotron */
 .jumbotron {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.9));
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.75),
+            rgba(0, 0, 0, 0.85)
+        ),
+        url("https://media.istockphoto.com/id/987365514/id/vektor/perangkat-lunak-pengembangan-web-konsep-pemrograman-bahasa-pemrograman-abstrak-dan-kode.jpg?s=612x612&w=0&k=20&c=6YZCoVqjeE0YN5RKSlBT6FSHJFSUPF8loA4d21luS_o=");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     color: white;
     padding: 180px 0 120px;
     text-align: center;
     margin-top: 70px;
     position: relative;
 }
+
 
 .jumbotron-content {
     max-width: 800px;
