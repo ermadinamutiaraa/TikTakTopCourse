@@ -261,7 +261,7 @@ body {
             rgba(0, 0, 0, 0.75),
             rgba(0, 0, 0, 0.85)
         ),
-        url("https://media.istockphoto.com/id/987365514/id/vektor/perangkat-lunak-pengembangan-web-konsep-pemrograman-bahasa-pemrograman-abstrak-dan-kode.jpg?s=612x612&w=0&k=20&c=6YZCoVqjeE0YN5RKSlBT6FSHJFSUPF8loA4d21luS_o=");
+        url("https://i.pinimg.com/1200x/80/25/2b/80252b30057dbf650e32bf15c6dff1d0.jpg");
 
     background-size: cover;
     background-position: center;
@@ -357,21 +357,6 @@ body {
 
 .jumbotron-wave path {
     fill: var(--light);
-}
-
-/* Course Selection Notification */
-.course-notification {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    background: var(--card-bg);
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    width: 350px;
-    z-index: 999;
-    border: 1px solid var(--card-border);
-    animation: slideInRight 0.5s ease;
-    display: none;
 }
 
 @keyframes slideInRight {
@@ -1076,13 +1061,6 @@ body {
     display: block;
 }
 
-.response-message.info {
-    background-color: rgba(33, 150, 243, 0.1);
-    color: #2196f3;
-    border: 1px solid rgba(33, 150, 243, 0.3);
-    display: block;
-}
-
 /* STATISTIK SECTION */
 .achievements-grid {
     display: grid;
@@ -1554,20 +1532,6 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-    
-    .dropdown-content {
-        position: static;
-        box-shadow: none;
-        background: rgba(0, 0, 0, 0.2);
-        margin: 10px 0 10px 20px;
-        border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        display: none;
-    }
-    
-    .dropdown.active .dropdown-content {
-        display: block;
     }
     
     .hamburger {

@@ -17,20 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ================= PILIH KELAS (FIX FINAL) ================= */
+  /* ================= PILIH KELAS ================= */
   document.querySelectorAll('.course-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const courseName = btn.dataset.courseName;
       const select = document.getElementById('anggotaProgram');
-
       if (!select) return;
-
-      // Set option berdasarkan TEXT (bukan value)
       Array.from(select.options).forEach(option => {
         option.selected = option.text.trim() === courseName.trim();
       });
-
-      // Scroll ke form pendaftaran
       document
         .getElementById('register')
         ?.scrollIntoView({ behavior: 'smooth' });
