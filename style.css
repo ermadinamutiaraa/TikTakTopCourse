@@ -397,128 +397,6 @@ body {
 }
 
 /* ===========================================
-   NOTIFICATION POPUP
-=========================================== */
-.course-notification {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    width: 400px;
-    max-width: calc(100% - 40px);
-    background: var(--card-bg);
-    border-radius: 15px;
-    box-shadow: var(--shadow-hover);
-    z-index: 999;
-    animation: slideInRight 0.5s ease;
-    border: 1px solid var(--card-border);
-    display: none;
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.notification-content {
-    padding: 20px;
-}
-
-.notification-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--card-border);
-}
-
-.notification-header i {
-    color: var(--secondary);
-    font-size: 1.5rem;
-}
-
-.notification-header h3 {
-    flex: 1;
-    color: var(--dark);
-    font-size: 1.2rem;
-}
-
-.close-notification {
-    background: none;
-    border: none;
-    color: var(--gray);
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: var(--transition);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.close-notification:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--secondary);
-}
-
-.notification-body p {
-    color: var(--gray);
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-}
-
-.course-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.course-tag {
-    background: rgba(0, 212, 255, 0.1);
-    color: var(--secondary);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: var(--transition);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    white-space: nowrap;
-}
-
-.course-tag:hover,
-.course-tag.selected {
-    background: rgba(0, 212, 255, 0.2);
-    transform: translateY(-2px);
-    border-color: var(--secondary);
-}
-
-.btn-notification {
-    display: block;
-    text-align: center;
-    background: var(--orange-gradient);
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: var(--transition);
-    width: 100%;
-}
-
-.btn-notification:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
-}
-
-/* ===========================================
    ABOUT SECTION
 =========================================== */
 .about-content {
@@ -888,7 +766,7 @@ body {
 }
 
 /* ===========================================
-   FORM SECTION (SIDE-BY-SIDE LAYOUT)
+   FORM SECTION - FIXED FOR MOBILE
 =========================================== */
 .form-container {
     display: grid;
@@ -901,33 +779,61 @@ body {
     margin-top: 20px;
     border: 1px solid var(--card-border);
     align-items: start;
+    max-width: 100%;
+    overflow: hidden;
 }
 
+/* Form Header */
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: var(--gray);
+    font-size: 1.1rem;
+}
+
+/* Form Left Side */
 .form-left {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    min-width: 0; /* Penting untuk mencegah overflow */
 }
 
 .form-group {
     margin-bottom: 25px;
+    width: 100%;
+    position: relative;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--dark);
     font-size: 1rem;
+    width: 100%;
 }
 
 .required {
     color: var(--accent);
+    font-weight: 700;
 }
 
+/* FIXED: Form inputs yang TIDAK KEPANJANGAN */
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
+    max-width: 100%;
     padding: 14px 18px;
     border: 1px solid var(--card-border);
     border-radius: 10px;
@@ -937,6 +843,20 @@ body {
     background-color: #2a2a2a;
     color: var(--dark);
     resize: vertical;
+    box-sizing: border-box; /* Pastikan padding tidak nambah width */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+}
+
+/* Custom Select Arrow */
+.form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300d4ff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 12px;
+    padding-right: 45px;
 }
 
 .form-group input:focus,
@@ -945,25 +865,54 @@ body {
     outline: none;
     border-color: var(--secondary);
     background-color: #333;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+/* Placeholder Styling */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+    font-size: 0.95rem;
+    opacity: 0.7;
 }
 
 .form-hint {
     font-size: 0.85rem;
-    color: #666;
-    margin-top: 5px;
+    color: #888;
+    margin-top: 8px;
     display: block;
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
 }
 
+/* Example Text */
+.example-text {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    font-style: italic;
+    margin-top: 5px;
+    padding-left: 5px;
+    border-left: 2px solid var(--secondary);
+}
+
+/* Checkbox Group */
 .checkbox-group {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     margin: 25px 0;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .checkbox-group input {
-    width: auto;
-    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    accent-color: var(--secondary);
+    flex-shrink: 0;
 }
 
 .checkbox-group label {
@@ -971,12 +920,16 @@ body {
     font-weight: normal;
     font-size: 0.95rem;
     color: var(--gray);
+    line-height: 1.5;
+    flex: 1;
+    min-width: 0;
 }
 
 .terms-link {
     color: var(--secondary);
     text-decoration: underline !important;
     transition: var(--transition);
+    font-weight: 500;
 }
 
 .terms-link:hover {
@@ -984,17 +937,19 @@ body {
     text-decoration: none !important;
 }
 
+/* Form Buttons */
 .form-buttons {
     display: flex;
     gap: 20px;
     margin-top: 30px;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .submit-btn,
 .reset-btn {
-    padding: 15px 30px;
-    border-radius: 10px;
+    padding: 16px 32px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     font-weight: 600;
@@ -1006,6 +961,8 @@ body {
     gap: 10px;
     flex: 1;
     min-width: 150px;
+    height: 52px;
+    box-sizing: border-box;
 }
 
 .submit-btn {
@@ -1026,13 +983,14 @@ body {
 
 .reset-btn:hover {
     background-color: #444;
+    transform: translateY(-2px);
 }
 
 /* ===========================================
-   KEUNTUNGAN ANGGOTA (SIDEBAR)
+   BENEFITS SECTION (RIGHT SIDE)
 =========================================== */
 .form-info {
-    background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
     padding: 30px;
     border-radius: 15px;
     border-left: 4px solid var(--secondary);
@@ -1040,6 +998,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    min-width: 0; /* Penting untuk mencegah overflow */
 }
 
 .form-info h3 {
@@ -1055,6 +1014,7 @@ body {
     list-style: none;
     margin-bottom: 30px;
     flex: 1;
+    min-width: 0;
 }
 
 .benefits-list li {
@@ -1083,6 +1043,7 @@ body {
 
 .benefit-content {
     flex: 1;
+    min-width: 0;
 }
 
 .benefits-list strong {
@@ -1090,14 +1051,19 @@ body {
     color: var(--dark);
     margin-bottom: 5px;
     font-size: 1rem;
+    font-weight: 600;
+    word-wrap: break-word;
 }
 
 .benefits-list p {
     color: var(--gray);
     font-size: 0.9rem;
     margin: 0;
+    line-height: 1.5;
+    word-wrap: break-word;
 }
 
+/* Contact Info */
 .contact-info {
     margin-top: 30px;
     padding-top: 20px;
@@ -1126,11 +1092,15 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 0.95rem;
+    word-wrap: break-word;
 }
 
 .contact-details i {
     color: var(--secondary);
     width: 20px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .contact-hours {
@@ -1138,6 +1108,7 @@ body {
     color: var(--gray);
     padding-left: 25px;
     position: relative;
+    word-wrap: break-word;
 }
 
 .contact-hours i {
@@ -1153,11 +1124,19 @@ body {
     display: none;
     animation: fadeIn 0.5s ease;
     margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .response-message.success {
@@ -1172,6 +1151,773 @@ body {
     color: #f44336;
     border: 1px solid rgba(244, 67, 54, 0.3);
     display: block;
+}
+
+/* ===========================================
+   RESPONSIVE BREAKPOINTS - FORM FIXED
+=========================================== */
+
+/* Tablet (992px dan bawah) */
+@media (max-width: 992px) {
+    .form-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .form-info {
+        order: -1;
+    }
+    
+    /* Improve touch targets */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 18px 20px;
+        font-size: 16px;
+        max-width: 100%;
+    }
+    
+    .submit-btn,
+    .reset-btn {
+        height: 56px;
+        font-size: 1.05rem;
+        width: 100%;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Landscape (768px dan bawah) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .form-container {
+        padding: 30px;
+        gap: 35px;
+        margin-top: 10px;
+        border-radius: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Navigation Mobile */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        flex-direction: column;
+        background: var(--card-bg);
+        width: 100%;
+        height: 100vh;
+        text-align: left;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--shadow);
+        padding: 80px 20px 40px;
+        gap: 0;
+        z-index: 999;
+        overflow-y: auto;
+        justify-content: flex-start;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-link {
+        padding: 15px;
+        border-bottom: 1px solid var(--card-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .dropdown-content {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+    
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Hero Section */
+    .jumbotron {
+        padding: 140px 0 80px;
+        margin-top: 60px;
+    }
+    
+    .jumbotron-title {
+        font-size: 2.2rem;
+    }
+    
+    .jumbotron-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Stats Grid */
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Form inputs larger for mobile - FIXED WIDTH */
+    .form-group {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    
+    .form-group label {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        width: 100%;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 18px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        min-height: 56px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+    }
+    
+    /* Select dropdown larger arrow */
+    .form-group select {
+        background-position: right 20px center;
+        background-size: 14px;
+        padding-right: 50px;
+    }
+    
+    /* Buttons full width on mobile */
+    .form-buttons {
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .submit-btn,
+    .reset-btn {
+        width: 100%;
+        height: 56px;
+        font-size: 1.05rem;
+        padding: 18px 24px;
+    }
+    
+    /* Benefits list adjustments */
+    .benefits-list li {
+        padding: 12px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .form-info {
+        padding: 25px;
+    }
+    
+    /* Course Footer */
+    .course-footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .course-price {
+        font-size: 1.8rem;
+    }
+    
+    /* Gallery */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .lightbox-image-container {
+        height: 300px;
+    }
+    
+    /* Services & Categories */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Achievements */
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Portrait (576px dan bawah) */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .section {
+        padding: 50px 0;
+    }
+    
+    .form-container {
+        padding: 20px;
+        gap: 30px;
+        margin: 0;
+        width: 100%;
+        border-radius: 12px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .section-subtitle {
+        margin-bottom: 30px;
+        font-size: 1rem;
+    }
+    
+    /* Jumbotron */
+    .jumbotron {
+        padding: 120px 0 60px;
+    }
+    
+    .jumbotron-title {
+        font-size: 1.8rem;
+    }
+    
+    /* Stats */
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Form - FIXED: Tidak kepanjangan */
+    .form-group {
+        margin-bottom: 18px;
+        width: 100%;
+    }
+    
+    .form-group label {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 16px 18px;
+        font-size: 16px;
+        min-height: 52px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
+    }
+    
+    /* Remove any horizontal scroll */
+    input, select, textarea {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    /* Placeholder visibility */
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        font-size: 14px;
+    }
+    
+    .form-hint {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        width: 100%;
+    }
+    
+    /* Checkbox group */
+    .checkbox-group {
+        margin: 20px 0;
+        width: 100%;
+    }
+    
+    .checkbox-group label {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    /* Buttons */
+    .submit-btn,
+    .reset-btn {
+        height: 52px;
+        font-size: 1rem;
+        padding: 16px 20px;
+        border-radius: 10px;
+        width: 100%;
+    }
+    
+    /* Benefits section */
+    .benefits-list li {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .benefits-list strong {
+        font-size: 0.95rem;
+    }
+    
+    .benefits-list p {
+        font-size: 0.85rem;
+    }
+    
+    .form-info {
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    /* Service Card */
+    .service-card {
+        padding: 25px 20px;
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    /* Category Card */
+    .category-card {
+        padding: 20px;
+    }
+    
+    .category-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    /* Course Card */
+    .course-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .course-price {
+        font-size: 1.4rem;
+    }
+    
+    .course-btn {
+        width: 100%;
+    }
+    
+    /* Logo */
+    .logo-title {
+        font-size: 1.1rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .footer-logo-img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .nav-container {
+        padding: 10px 15px;
+    }
+    
+    .achievement-card h3 {
+        min-height: auto;
+    }
+}
+
+/* Small Mobile (400px dan bawah) */
+@media (max-width: 400px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .jumbotron-title {
+        font-size: 1.6rem;
+    }
+    
+    .jumbotron-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .cta-button {
+        padding: 14px 25px;
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+    
+    .course-header {
+        padding: 20px;
+    }
+    
+    .course-content {
+        padding: 20px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .category-card h4 {
+        font-size: 1.1rem;
+    }
+    
+    .form-container {
+        padding: 15px;
+        margin: 0;
+        width: 100%;
+        border-radius: 10px;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px 14px;
+        min-height: 48px;
+        font-size: 14px;
+    }
+    
+    .submit-btn,
+    .reset-btn {
+        height: 48px;
+        padding: 14px 18px;
+        font-size: 0.95rem;
+    }
+    
+    /* Required asterisk lebih terlihat */
+    .required {
+        font-size: 1.2rem;
+    }
+    
+    /* Adjust hint text */
+    .form-hint {
+        font-size: 0.75rem;
+    }
+    
+    .example-text {
+        font-size: 0.75rem;
+    }
+}
+
+/* ===========================================
+   FIX KHUSUS UNTUK FORM TIDAK KEPANJANGAN
+=========================================== */
+
+/* Force form elements to stay within container */
+.form-container * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Prevent text from overflowing */
+.form-group label,
+.form-hint,
+.example-text,
+.benefits-list strong,
+.benefits-list p,
+.contact-details p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* iOS Safari Fix */
+@supports (-webkit-touch-callout: none) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px !important; /* Prevent iOS zoom */
+        -webkit-appearance: none;
+        border-radius: 10px;
+    }
+    
+    select {
+        cursor: pointer;
+    }
+}
+
+/* Android Chrome Fix */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        transform: translateZ(0); /* Force hardware acceleration */
+    }
+}
+
+/* Dark mode improvements */
+@media (prefers-color-scheme: dark) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        background-color: #252525;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        background-color: #2a2a2a;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        border: 2px solid var(--dark);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border: 2px solid var(--secondary);
+    }
+}
+
+/* ===========================================
+   BACK TO TOP BUTTON
+=========================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--orange-gradient);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* ===========================================
+   NOTIFICATION POPUP
+=========================================== */
+.course-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 400px;
+    max-width: calc(100% - 40px);
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow-hover);
+    z-index: 999;
+    animation: slideInRight 0.5s ease;
+    border: 1px solid var(--card-border);
+    display: none;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-content {
+    padding: 20px;
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.notification-header i {
+    color: var(--secondary);
+    font-size: 1.5rem;
+}
+
+.notification-header h3 {
+    flex: 1;
+    color: var(--dark);
+    font-size: 1.2rem;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-notification:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--secondary);
+}
+
+.notification-body p {
+    color: var(--gray);
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.course-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.course-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--secondary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    white-space: nowrap;
+}
+
+.course-tag:hover,
+.course-tag.selected {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: var(--secondary);
+}
+
+.btn-notification {
+    display: block;
+    text-align: center;
+    background: var(--orange-gradient);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.btn-notification:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
 }
 
 /* ===========================================
@@ -1560,473 +2306,6 @@ body {
 .footer-bottom i {
     color: var(--accent);
     margin: 0 5px;
-}
-
-/* ===========================================
-   BACK TO TOP BUTTON
-=========================================== */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--orange-gradient);
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: var(--transition);
-    opacity: 0;
-    visibility: hidden;
-    z-index: 999;
-    border: none;
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
-}
-
-/* ===========================================
-   RESPONSIVE BREAKPOINTS
-=========================================== */
-
-/* Tablet (992px dan bawah) */
-@media (max-width: 992px) {
-    .form-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 40px;
-    }
-    
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-    
-    .achievements-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .form-info {
-        order: -1;
-    }
-}
-
-/* Mobile (768px dan bawah) */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .section {
-        padding: 60px 0;
-    }
-    
-    /* Navigation Mobile */
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        flex-direction: column;
-        background: var(--card-bg);
-        width: 100%;
-        height: 100vh;
-        text-align: left;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: var(--shadow);
-        padding: 80px 20px 40px;
-        gap: 0;
-        z-index: 999;
-        overflow-y: auto;
-        justify-content: flex-start;
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .nav-link {
-        padding: 15px;
-        border-bottom: 1px solid var(--card-border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-    
-    .dropdown-content {
-        position: static;
-        display: none;
-        width: 100%;
-        box-shadow: none;
-        border: none;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        margin-top: 10px;
-    }
-    
-    .dropdown.active .dropdown-content {
-        display: block;
-    }
-    
-    .hamburger {
-        display: flex;
-    }
-    
-    /* Hero Section */
-    .jumbotron {
-        padding: 140px 0 80px;
-        margin-top: 60px;
-    }
-    
-    .jumbotron-title {
-        font-size: 2.2rem;
-    }
-    
-    .jumbotron-actions {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    
-    .cta-button {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    /* Stats Grid */
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Form Section */
-    .form-container {
-        padding: 30px;
-        gap: 35px;
-        margin-top: 10px;
-    }
-    
-    .form-buttons {
-        flex-direction: column;
-    }
-    
-    .submit-btn,
-    .reset-btn {
-        width: 100%;
-    }
-    
-    /* Course Footer */
-    .course-footer {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    
-    .course-price {
-        font-size: 1.8rem;
-    }
-    
-    /* Notification */
-    .course-notification {
-        width: calc(100% - 30px);
-        right: 15px;
-        left: 15px;
-        top: 80px;
-    }
-    
-    /* Gallery */
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .lightbox-image-container {
-        height: 300px;
-    }
-    
-    /* Services & Categories */
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .categories-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Achievements */
-    .achievements-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Footer */
-    .footer-content {
-        flex-direction: column;
-        gap: 40px;
-    }
-    
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
-    }
-    
-    /* Form Input Improvements for Mobile */
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 16px 20px;
-        font-size: 16px;
-        min-height: 56px;
-    }
-    
-    .form-group textarea {
-        min-height: 120px;
-    }
-    
-    .form-group label {
-        font-size: 1.05rem;
-        margin-bottom: 12px;
-    }
-    
-    .submit-btn,
-    .reset-btn {
-        height: 56px;
-        font-size: 1.05rem;
-    }
-}
-
-/* Mobile (576px dan bawah) */
-@media (max-width: 576px) {
-    .container {
-        padding: 0 12px;
-    }
-    
-    .section {
-        padding: 50px 0;
-    }
-    
-    .jumbotron {
-        padding: 120px 0 60px;
-    }
-    
-    .jumbotron-title {
-        font-size: 1.8rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .section-subtitle {
-        margin-bottom: 30px;
-    }
-    
-    /* Stats */
-    .stats {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Form */
-    .form-container {
-        padding: 20px;
-        border-radius: 15px;
-        margin: 0 10px;
-        width: calc(100% - 20px);
-    }
-    
-    .form-info {
-        padding: 20px;
-    }
-    
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 14px 16px;
-        min-height: 52px;
-        font-size: 16px;
-    }
-    
-    .form-group textarea {
-        min-height: 100px;
-    }
-    
-    /* Benefits List */
-    .benefits-list li {
-        padding: 12px;
-        margin-bottom: 15px;
-    }
-    
-    /* Service Card */
-    .service-card {
-        padding: 25px 20px;
-    }
-    
-    .service-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
-    }
-    
-    /* Category Card */
-    .category-card {
-        padding: 20px;
-    }
-    
-    .category-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
-    /* Course Card */
-    .course-header h3 {
-        font-size: 1.3rem;
-    }
-    
-    .course-price {
-        font-size: 1.4rem;
-    }
-    
-    .course-btn {
-        width: 100%;
-    }
-    
-    /* Logo */
-    .logo-title {
-        font-size: 1.1rem;
-    }
-    
-    .logo-icon {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .footer-logo-img {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .nav-container {
-        padding: 10px 15px;
-    }
-    
-    .achievement-card h3 {
-        min-height: auto;
-    }
-    
-    /* Form Buttons */
-    .submit-btn,
-    .reset-btn {
-        height: 52px;
-        padding: 16px 20px;
-    }
-}
-
-/* Small Mobile (400px dan bawah) */
-@media (max-width: 400px) {
-    .container {
-        padding: 0 10px;
-    }
-    
-    .jumbotron-title {
-        font-size: 1.6rem;
-    }
-    
-    .jumbotron-subtitle {
-        font-size: 1rem;
-    }
-    
-    .section-title {
-        font-size: 1.6rem;
-    }
-    
-    .cta-button {
-        padding: 14px 25px;
-        font-size: 0.9rem;
-        min-width: auto;
-    }
-    
-    .course-header {
-        padding: 20px;
-    }
-    
-    .course-content {
-        padding: 20px;
-    }
-    
-    .service-card h3 {
-        font-size: 1.2rem;
-    }
-    
-    .category-card h4 {
-        font-size: 1.1rem;
-    }
-    
-    .form-container {
-        padding: 15px;
-        margin: 0 5px;
-        width: calc(100% - 10px);
-    }
-    
-    .form-group label {
-        font-size: 0.9rem;
-    }
-    
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 12px 14px;
-        min-height: 48px;
-    }
-    
-    .submit-btn,
-    .reset-btn {
-        height: 48px;
-        padding: 14px 18px;
-        font-size: 0.95rem;
-    }
-    
-    /* Required asterisk lebih terlihat */
-    .required {
-        font-size: 1.2rem;
-    }
-}
-
-/* Fix untuk iOS Safari */
-@supports (-webkit-touch-callout: none) {
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        font-size: 16px !important;
-    }
-    
-    select {
-        cursor: pointer;
-    }
 }
 
 /* Print Styles */
