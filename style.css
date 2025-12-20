@@ -1,4 +1,6 @@
-/* Reset & Base */
+/* ===========================================
+   RESET & BASE STYLES
+=========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -24,22 +26,57 @@
     --card-border: #333333;
 }
 
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--dark);
     background-color: var(--light);
     overflow-x: hidden;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* ===========================================
+   TYPOGRAPHY & HELPERS
+=========================================== */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ===========================================
+   LAYOUT & CONTAINERS
+=========================================== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 .section {
     padding: 80px 0;
+    position: relative;
 }
 
 .section-light {
@@ -47,11 +84,12 @@ body {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     text-align: center;
     margin-bottom: 15px;
     color: var(--dark);
     position: relative;
+    padding-bottom: 15px;
 }
 
 .section-title::after {
@@ -60,7 +98,7 @@ body {
     width: 80px;
     height: 4px;
     background: var(--orange-gradient);
-    bottom: -10px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 2px;
@@ -70,27 +108,26 @@ body {
     text-align: center;
     color: var(--gray);
     margin-bottom: 50px;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
 }
 
-.highlight {
-    color: var(--secondary);
-    font-weight: 600;
-}
-
-/* Navigation */
+/* ===========================================
+   NAVIGATION
+=========================================== */
 .navbar {
     background-color: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: var(--shadow);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--card-border);
     transition: var(--transition);
 }
 
@@ -103,15 +140,18 @@ body {
     margin: 0 auto;
 }
 
+/* Logo */
 .logo {
     display: flex;
     align-items: center;
     gap: 12px;
+    z-index: 1001;
 }
 
 .logo-icon {
     width: 50px;
     height: 50px;
+    min-width: 50px;
     background: var(--orange-gradient);
     border-radius: 10px;
     display: flex;
@@ -120,6 +160,7 @@ body {
     box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
     overflow: hidden;
 }
+
 .logo-img {
     width: 100%;
     height: 100%;
@@ -135,7 +176,7 @@ body {
 
 .logo-title {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     line-height: 1.2;
     background: var(--orange-gradient);
     -webkit-background-clip: text;
@@ -145,16 +186,19 @@ body {
 }
 
 .logo-subtitle {
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
     color: var(--gray);
     margin-top: 2px;
 }
 
+/* Navigation Menu */
 .nav-menu {
     display: flex;
     list-style: none;
     gap: 30px;
+    align-items: center;
 }
+
 .nav-link {
     color: var(--dark);
     font-weight: 500;
@@ -164,11 +208,14 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    white-space: nowrap;
 }
+
 .nav-link:hover,
 .nav-link.active {
     color: var(--secondary);
 }
+
 .nav-link.active::after {
     content: '';
     position: absolute;
@@ -186,6 +233,9 @@ body {
     padding: 8px 20px;
     border-radius: 25px;
     transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .register-btn:hover {
@@ -211,6 +261,7 @@ body {
     left: 0;
     overflow: hidden;
     border: 1px solid var(--card-border);
+    animation: fadeIn 0.3s ease;
 }
 
 .dropdown-content a {
@@ -232,6 +283,7 @@ body {
     display: block;
 }
 
+/* Hamburger Menu */
 .hamburger {
     display: none;
     background: none;
@@ -243,13 +295,18 @@ body {
     height: 40px;
     border-radius: 5px;
     transition: var(--transition);
+    z-index: 1001;
+    align-items: center;
+    justify-content: center;
 }
 
 .hamburger:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Jumbotron */
+/* ===========================================
+   HERO/JUMBOTRON SECTION
+=========================================== */
 .jumbotron {
     background:
         linear-gradient(
@@ -266,6 +323,7 @@ body {
     margin-top: 70px;
     position: relative;
 }
+
 .jumbotron-content {
     max-width: 800px;
     margin: 0 auto;
@@ -273,20 +331,24 @@ body {
     position: relative;
     z-index: 2;
 }
+
 .jumbotron-title {
-    font-size: 3.2rem;
+    font-size: clamp(2.5rem, 5vw, 3.2rem);
     margin-bottom: 20px;
     font-weight: 700;
     line-height: 1.2;
 }
+
 .jumbotron-subtitle {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
     margin-bottom: 35px;
     opacity: 0.9;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.5;
 }
+
 .jumbotron-actions {
     display: flex;
     gap: 20px;
@@ -303,11 +365,14 @@ body {
     padding: 16px 40px;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     transition: var(--transition);
     border: none;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+    justify-content: center;
+    text-align: center;
+    min-width: 200px;
 }
 
 .cta-button.secondary {
@@ -347,6 +412,24 @@ body {
     fill: var(--light);
 }
 
+/* ===========================================
+   NOTIFICATION POPUP
+=========================================== */
+.course-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 400px;
+    max-width: calc(100% - 40px);
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow-hover);
+    z-index: 999;
+    animation: slideInRight 0.5s ease;
+    border: 1px solid var(--card-border);
+    display: none;
+}
+
 @keyframes slideInRight {
     from {
         transform: translateX(100%);
@@ -361,6 +444,7 @@ body {
 .notification-content {
     padding: 20px;
 }
+
 .notification-header {
     display: flex;
     align-items: center;
@@ -369,15 +453,18 @@ body {
     padding-bottom: 15px;
     border-bottom: 1px solid var(--card-border);
 }
+
 .notification-header i {
     color: var(--secondary);
     font-size: 1.5rem;
 }
+
 .notification-header h3 {
     flex: 1;
     color: var(--dark);
     font-size: 1.2rem;
 }
+
 .close-notification {
     background: none;
     border: none;
@@ -392,10 +479,12 @@ body {
     align-items: center;
     justify-content: center;
 }
+
 .close-notification:hover {
     background: rgba(255, 255, 255, 0.1);
     color: var(--secondary);
 }
+
 .notification-body p {
     color: var(--gray);
     margin-bottom: 15px;
@@ -418,6 +507,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     border: 1px solid rgba(0, 212, 255, 0.3);
+    white-space: nowrap;
 }
 
 .course-tag:hover,
@@ -436,6 +526,7 @@ body {
     border-radius: 8px;
     font-weight: 500;
     transition: var(--transition);
+    width: 100%;
 }
 
 .btn-notification:hover {
@@ -443,7 +534,9 @@ body {
     box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
 }
 
-/* About */
+/* ===========================================
+   ABOUT SECTION
+=========================================== */
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -454,7 +547,7 @@ body {
 
 .about-text p {
     margin-bottom: 25px;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     line-height: 1.8;
     color: var(--gray);
 }
@@ -483,14 +576,14 @@ body {
 }
 
 .stat-item h3 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     color: var(--secondary);
     margin-bottom: 5px;
     font-weight: 700;
 }
 
 .stat-item p {
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     color: var(--gray);
     margin: 0;
 }
@@ -508,7 +601,9 @@ body {
     box-shadow: var(--shadow);
 }
 
-/* Kelas Section */
+/* ===========================================
+   COURSES SECTION
+=========================================== */
 .courses-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -523,6 +618,9 @@ body {
     box-shadow: var(--shadow);
     transition: var(--transition);
     border: 1px solid var(--card-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-card:hover {
@@ -569,12 +667,16 @@ body {
 
 .course-content {
     padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-content p {
     margin-bottom: 20px;
     color: var(--gray);
     line-height: 1.7;
+    flex: 1;
 }
 
 .course-content ul {
@@ -601,6 +703,8 @@ body {
     align-items: center;
     padding: 20px 25px;
     border-top: 1px solid var(--card-border);
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .course-price {
@@ -619,6 +723,7 @@ body {
     font-weight: 600;
     font-size: 0.95rem;
     transition: var(--transition);
+    min-width: 140px;
 }
 
 .course-btn:hover {
@@ -626,7 +731,9 @@ body {
     box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
 }
 
-/* Categories Section */
+/* ===========================================
+   CATEGORIES SECTION
+=========================================== */
 .categories-section {
     margin-top: 80px;
     padding-top: 60px;
@@ -635,7 +742,7 @@ body {
 
 .categories-title {
     text-align: center;
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 3vw, 2rem);
     color: var(--dark);
     margin-bottom: 40px;
     position: relative;
@@ -666,6 +773,7 @@ body {
     padding: 30px;
     transition: var(--transition);
     border: 1px solid var(--card-border);
+    height: 100%;
 }
 
 .category-card:hover {
@@ -720,7 +828,9 @@ body {
     border-bottom: none;
 }
 
-/* Layanan Section */
+/* ===========================================
+   SERVICES SECTION
+=========================================== */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -735,6 +845,9 @@ body {
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--card-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
@@ -767,6 +880,7 @@ body {
     color: var(--gray);
     margin-bottom: 20px;
     line-height: 1.7;
+    flex: 1;
 }
 
 .service-features {
@@ -789,10 +903,12 @@ body {
     font-size: 0.9rem;
 }
 
-/* Form Pendaftaran */
+/* ===========================================
+   FORM SECTION (SIDE-BY-SIDE LAYOUT)
+=========================================== */
 .form-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr; /* DUA KOLOM SEJAJAR */
     gap: 50px;
     background: var(--card-bg);
     border-radius: 20px;
@@ -800,10 +916,18 @@ body {
     box-shadow: var(--shadow);
     margin-top: 20px;
     border: 1px solid var(--card-border);
+    align-items: start;
 }
+
+.form-left {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-group {
     margin-bottom: 25px;
 }
+
 .form-group label {
     display: block;
     margin-bottom: 10px;
@@ -811,9 +935,11 @@ body {
     color: var(--dark);
     font-size: 1rem;
 }
+
 .required {
     color: var(--accent);
 }
+
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -826,7 +952,9 @@ body {
     transition: var(--transition);
     background-color: #2a2a2a;
     color: var(--dark);
+    resize: vertical;
 }
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -834,42 +962,51 @@ body {
     border-color: var(--secondary);
     background-color: #333;
 }
+
 .form-hint {
     font-size: 0.85rem;
     color: #666;
     margin-top: 5px;
     display: block;
 }
+
 .checkbox-group {
     display: flex;
     align-items: flex-start;
     gap: 12px;
     margin: 25px 0;
 }
+
 .checkbox-group input {
     width: auto;
     margin-top: 5px;
 }
+
 .checkbox-group label {
     margin: 0;
     font-weight: normal;
     font-size: 0.95rem;
     color: var(--gray);
 }
+
 .terms-link {
     color: var(--secondary);
     text-decoration: underline !important;
     transition: var(--transition);
 }
+
 .terms-link:hover {
     color: var(--dark);
     text-decoration: none !important;
 }
+
 .form-buttons {
     display: flex;
     gap: 20px;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
+
 .submit-btn,
 .reset-btn {
     padding: 15px 30px;
@@ -883,32 +1020,44 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    flex: 1;
+    min-width: 150px;
 }
+
 .submit-btn {
     background: var(--orange-gradient);
     color: white;
-    flex: 2;
 }
+
 .submit-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
 }
+
 .reset-btn {
     background-color: #333;
     color: var(--dark);
     border: 1px solid var(--card-border);
-    flex: 1;
 }
+
 .reset-btn:hover {
     background-color: #444;
 }
+
+/* ===========================================
+   KEUNTUNGAN ANGGOTA (SIDEBAR)
+=========================================== */
 .form-info {
     background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
     padding: 30px;
     border-radius: 15px;
     border-left: 4px solid var(--secondary);
     border: 1px solid var(--card-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
+
 .form-info h3 {
     display: flex;
     align-items: center;
@@ -921,6 +1070,7 @@ body {
 .benefits-list {
     list-style: none;
     margin-bottom: 30px;
+    flex: 1;
 }
 
 .benefits-list li {
@@ -932,12 +1082,23 @@ body {
     background: rgba(0, 212, 255, 0.05);
     border-radius: 10px;
     border-left: 3px solid var(--secondary);
+    transition: var(--transition);
+}
+
+.benefits-list li:hover {
+    background: rgba(0, 212, 255, 0.1);
+    transform: translateX(5px);
 }
 
 .benefits-list i {
     color: var(--secondary);
     font-size: 1.2rem;
     margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.benefit-content {
+    flex: 1;
 }
 
 .benefits-list strong {
@@ -951,6 +1112,26 @@ body {
     color: var(--gray);
     font-size: 0.9rem;
     margin: 0;
+}
+
+.benefit-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.benefit-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--secondary);
+}
+
+.benefit-checkbox label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    cursor: pointer;
 }
 
 .contact-info {
@@ -981,6 +1162,11 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.contact-details i {
+    color: var(--secondary);
+    width: 20px;
 }
 
 .contact-hours {
@@ -1024,11 +1210,12 @@ body {
     display: block;
 }
 
-/* STATISTIK SECTION */
+/* ===========================================
+   STATISTICS SECTION
+=========================================== */
 .achievements-grid {
     display: grid;
-    grid-template-columns: 
-    repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     margin-top: 40px;
 }
@@ -1067,6 +1254,10 @@ body {
     color: var(--dark);
     margin-bottom: 12px;
     font-size: 1.3rem;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .achievement-card p {
@@ -1075,7 +1266,9 @@ body {
     font-size: 0.95rem;
 }
 
-/* GALLERY SECTION */
+/* ===========================================
+   GALLERY SECTION
+=========================================== */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -1091,6 +1284,7 @@ body {
     transition: var(--transition);
     border: 1px solid var(--card-border);
     cursor: pointer;
+    height: 100%;
 }
 
 .gallery-item:hover {
@@ -1161,7 +1355,9 @@ body {
     font-size: 1rem;
 }
 
-/* Lightbox Modal */
+/* ===========================================
+   LIGHTBOX MODAL
+=========================================== */
 .lightbox-modal {
     position: fixed;
     top: 0;
@@ -1248,13 +1444,17 @@ body {
     line-height: 1.7;
     font-size: 1.1rem;
 }
-/* Footer - DENGAN LOGO */
+
+/* ===========================================
+   FOOTER
+=========================================== */
 .footer {
     background: linear-gradient(135deg, var(--primary-dark), #0a0a0a);
     color: white;
     padding: 70px 0 0;
     border-top: 1px solid #333;
 }
+
 .footer-content {
     display: flex;
     justify-content: space-between;
@@ -1264,10 +1464,12 @@ body {
     padding: 0 20px 60px;
     flex-wrap: wrap;
 }
+
 .footer-section {
     flex: 1;
     min-width: 200px;
 }
+
 .footer-section h4 {
     color: white;
     margin-bottom: 25px;
@@ -1275,6 +1477,7 @@ body {
     position: relative;
     padding-bottom: 10px;
 }
+
 .footer-section h4::after {
     content: '';
     position: absolute;
@@ -1284,13 +1487,15 @@ body {
     height: 3px;
     background: var(--secondary);
 }
-/* STYLE LOGO DI FOOTER */
+
+/* Footer Logo */
 .footer-logo {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
 }
+
 .footer-logo-img {
     width: 60px;
     height: 60px;
@@ -1299,6 +1504,7 @@ body {
     background: var(--orange-gradient);
     padding: 5px;
 }
+
 .footer-logo h3 {
     font-size: 1.8rem;
     margin-bottom: 5px;
@@ -1307,21 +1513,26 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
 .footer-logo p {
     font-size: 0.9rem;
     opacity: 0.8;
 }
+
 .footer-section > p {
     margin-bottom: 25px;
     opacity: 0.9;
     line-height: 1.7;
     color: var(--gray);
 }
+
 .social-icons {
     display: flex;
     gap: 15px;
     margin-top: 25px;
+    flex-wrap: wrap;
 }
+
 .social-icons a {
     display: inline-flex;
     align-items: center;
@@ -1334,13 +1545,16 @@ body {
     font-size: 1.2rem;
     transition: var(--transition);
 }
+
 .social-icons a:hover {
     background: var(--secondary);
     transform: translateY(-3px);
 }
+
 .footer-links {
     list-style: none;
 }
+
 .footer-links li {
     margin-bottom: 15px;
     display: flex;
@@ -1349,10 +1563,12 @@ body {
     opacity: 0.9;
     transition: var(--transition);
 }
+
 .footer-links li:hover {
     opacity: 1;
     transform: translateX(5px);
 }
+
 .footer-links i {
     color: var(--secondary);
     margin-top: 3px;
@@ -1382,17 +1598,51 @@ body {
     margin: 0 5px;
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
-    .container {
-        padding: 0 30px;
-    }
+/* ===========================================
+   BACK TO TOP BUTTON
+=========================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--orange-gradient);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
 }
 
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* ===========================================
+   RESPONSIVE BREAKPOINTS
+=========================================== */
+
+/* Tablet (992px dan bawah) */
 @media (max-width: 992px) {
     .form-container {
         grid-template-columns: 1fr;
         gap: 40px;
+        padding: 40px;
     }
     
     .about-content {
@@ -1401,8 +1651,7 @@ body {
     }
     
     .gallery-grid {
-        grid-template-columns: repeat(auto-fill, 
-        minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
     
     .achievements-grid {
@@ -1416,23 +1665,39 @@ body {
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .form-info {
+        order: -1;
+    }
 }
 
+/* Tablet Landscape / Small Desktop (768px dan bawah) */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    /* Navigation Mobile */
     .nav-menu {
         position: fixed;
-        top: 80px;
+        top: 0;
         left: -100%;
         flex-direction: column;
         background: var(--card-bg);
         width: 100%;
+        height: 100vh;
         text-align: left;
-        transition: 0.3s;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: var(--shadow);
-        padding: 20px;
+        padding: 80px 20px 40px;
         gap: 0;
         z-index: 999;
-        border-top: 1px solid var(--card-border);
+        overflow-y: auto;
+        justify-content: flex-start;
     }
     
     .nav-menu.active {
@@ -1445,76 +1710,59 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
     }
     
-    .hamburger {
+    .dropdown-content {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+    
+    .dropdown.active .dropdown-content {
         display: block;
     }
     
-    .jumbotron-title {
-        font-size: 2.5rem;
+    .hamburger {
+        display: flex;
     }
     
-    .jumbotron-subtitle {
-        font-size: 1.1rem;
+    /* Hero Section */
+    .jumbotron {
+        padding: 140px 0 80px;
+        margin-top: 60px;
+    }
+    
+    .jumbotron-title {
+        font-size: 2.2rem;
     }
     
     .jumbotron-actions {
         flex-direction: column;
         align-items: center;
+        gap: 15px;
     }
     
     .cta-button {
         width: 100%;
         max-width: 300px;
-        justify-content: center;
     }
     
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .section {
-        padding: 60px 0;
-    }
-    
+    /* Stats Grid */
     .stats {
         grid-template-columns: repeat(2, 1fr);
     }
     
+    /* Form Section */
     .form-container {
         padding: 30px;
     }
     
-    .lightbox-image-container {
-        height: 300px;
-    }
-    
-    .achievements-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .logo-title {
-        font-size: 1.3rem;
-    }
-    
-    .course-notification {
-        width: calc(100% - 40px);
-        right: 20px;
-        left: 20px;
-        top: 90px;
-    }
-    
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .categories-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 576px) {
     .form-buttons {
         flex-direction: column;
     }
@@ -1524,9 +1772,10 @@ body {
         width: 100%;
     }
     
+    /* Course Footer */
     .course-footer {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         text-align: center;
     }
     
@@ -1534,31 +1783,106 @@ body {
         font-size: 1.8rem;
     }
     
+    /* Notification */
+    .course-notification {
+        width: calc(100% - 30px);
+        right: 15px;
+        left: 15px;
+        top: 80px;
+    }
+    
+    /* Gallery */
     .gallery-grid {
         grid-template-columns: 1fr;
     }
     
-    .stats {
+    .lightbox-image-container {
+        height: 300px;
+    }
+    
+    /* Services & Categories */
+    .services-grid {
         grid-template-columns: 1fr;
     }
     
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Achievements */
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Footer */
     .footer-content {
         flex-direction: column;
         gap: 40px;
     }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
 
-    .achievement-card h3 {
-        min-height: auto;
+/* Mobile (576px dan bawah) */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 12px;
     }
     
-    .jumbotron-title {
-        font-size: 2rem;
+    .section {
+        padding: 50px 0;
     }
     
     .jumbotron {
-        padding: 150px 0 100px;
+        padding: 120px 0 60px;
     }
     
+    .jumbotron-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-subtitle {
+        margin-bottom: 30px;
+    }
+    
+    /* Stats */
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Form */
+    .form-container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .form-info {
+        padding: 20px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px 15px;
+    }
+    
+    /* Benefits List */
+    .benefits-list li {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    /* Service Card */
     .service-card {
         padding: 25px 20px;
     }
@@ -1569,20 +1893,9 @@ body {
         font-size: 2rem;
     }
     
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
-    }
-    
-    .benefits-list li {
-        padding: 12px;
-    }
-    
+    /* Category Card */
     .category-card {
-        padding: 25px 20px;
+        padding: 20px;
     }
     
     .category-icon {
@@ -1591,64 +1904,123 @@ body {
         font-size: 1.5rem;
     }
     
-    /* Logo Responsive */
-    .logo-img {
-        padding: 3px;
+    /* Course Card */
+    .course-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .course-price {
+        font-size: 1.4rem;
+    }
+    
+    .course-btn {
+        width: 100%;
+    }
+    
+    /* Logo */
+    .logo-title {
+        font-size: 1.1rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
     }
     
     .footer-logo-img {
         width: 50px;
         height: 50px;
     }
-    /* =========================
-   FIX FORM DI MOBILE
-========================= */
-@media (max-width: 768px) {
-
-  .form-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 0 16px;
-  }
-
-  .form-section {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .form-info {
-    width: 100%;
-    margin-top: 32px;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    font-size: 14px;
-  }
+    
+    .nav-container {
+        padding: 10px 15px;
+    }
+    
+    .achievement-card h3 {
+        min-height: auto;
+    }
 }
-@media (max-width: 768px) {
 
-  .section {
-    padding: 60px 0;
-  }
-
-  .section-title {
-    font-size: 1.6rem;
-  }
-
-  .section-subtitle {
-    font-size: 0.95rem;
-  }
-
-  .form-group {
-    margin-bottom: 16px;
-  }
-
-  textarea {
-    min-height: 100px;
-  }
+/* Small Mobile (400px dan bawah) */
+@media (max-width: 400px) {
+    .jumbotron-title {
+        font-size: 1.6rem;
+    }
+    
+    .jumbotron-subtitle {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 14px 25px;
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+    
+    .course-header {
+        padding: 20px;
+    }
+    
+    .course-content {
+        padding: 20px;
+    }
+    
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .category-card h4 {
+        font-size: 1.1rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    .submit-btn,
+    .reset-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
 }
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .footer,
+    .course-notification,
+    .back-to-top,
+    .cta-button,
+    .register-btn,
+    .course-btn {
+        display: none !important;
+    }
+    
+    body {
+        color: #000;
+        background: #fff;
+        font-size: 12pt;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    .section {
+        padding: 20pt 0;
+        break-inside: avoid;
+    }
+    
+    .form-container {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .jumbotron {
+        color: #000;
+        background: none !important;
+        padding: 40pt 0;
+        margin-top: 0;
+    }
 }
